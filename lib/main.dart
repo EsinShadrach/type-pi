@@ -4,6 +4,7 @@ import 'package:type_pi/helpers/platform_specifics/material_or_cupertino.dart';
 import 'package:type_pi/helpers/platform_specifics/scaffold.dart';
 import 'package:type_pi/helpers/widgets/sidebar.dart';
 import 'package:type_pi/providers/base.dart';
+import 'package:type_pi/providers/headers.dart';
 
 void main() {
   runApp(
@@ -11,6 +12,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (_) => NavRailProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => HeadersProvider(),
         ),
       ],
       child: const MyApp(),
@@ -38,14 +42,26 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PlatformScaffold(
+    return const PlatformScaffold(
       body: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SideBar(),
+          SideBar(),
           Expanded(
-            child: Container(
-              color: Colors.red,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Text("TYPE"),
+                  ),
+                ),
+                VerticalDivider(),
+                Expanded(
+                  child: Center(
+                    child: Text("JSON RESPONSE"),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

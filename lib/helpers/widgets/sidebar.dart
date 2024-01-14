@@ -8,24 +8,27 @@ class SideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final railProvider = context.watch<NavRailProvider>();
-    return NavigationRail(
-      useIndicator: true,
-      extended: railProvider.isOpened,
-      onDestinationSelected: (index) {
-        railProvider.selectIndex(index);
-      },
-      destinations: const [
-        NavigationRailDestination(
-          indicatorColor: Colors.red,
-          icon: Icon(Icons.code),
-          label: Text('Date'),
-        ),
-        NavigationRailDestination(
-          icon: Icon(Icons.code),
-          label: Text('Date'),
-        )
-      ],
-      selectedIndex: railProvider.selectedIndex,
-    );
+    if (railProvider.isOpened) {
+      return NavigationRail(
+        useIndicator: true,
+        extended: railProvider.isOpened,
+        onDestinationSelected: (index) {
+          railProvider.selectIndex(index);
+        },
+        destinations: const [
+          NavigationRailDestination(
+            indicatorColor: Colors.red,
+            icon: Icon(Icons.code),
+            label: Text('Date'),
+          ),
+          NavigationRailDestination(
+            icon: Icon(Icons.code),
+            label: Text('Date'),
+          )
+        ],
+        selectedIndex: railProvider.selectedIndex,
+      );
+    }
+    return const SizedBox();
   }
 }

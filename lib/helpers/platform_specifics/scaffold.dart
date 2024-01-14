@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:type_pi/helpers/extensions/on_context.dart';
+import 'package:type_pi/helpers/platform_specifics/buttons.dart';
 import 'package:type_pi/helpers/platform_specifics/text_field.dart';
+import 'package:type_pi/helpers/widgets/api_config_dialog.dart';
 import 'package:type_pi/providers/base.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -41,7 +44,7 @@ class PlatformScaffold extends StatelessWidget {
             IconButton(
               tooltip: "API Settings",
               onPressed: () {
-                // Show Api Settings like headers, body, etc. via modal
+                ShowMyDialogs().showAlertDialog(context);
               },
               icon: const Icon(Icons.settings),
             ),

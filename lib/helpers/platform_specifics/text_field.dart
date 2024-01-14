@@ -14,6 +14,7 @@ class PlatformTextField extends StatelessWidget {
     required this.placeholder,
     this.onSubmitted,
     this.onChanged,
+    this.padding,
   });
 
   static const Color turquoise = Color(0xFF40E0D0);
@@ -24,6 +25,7 @@ class PlatformTextField extends StatelessWidget {
   final String placeholder;
   final void Function(String)? onSubmitted;
   final void Function(String)? onChanged;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -36,23 +38,28 @@ class PlatformTextField extends StatelessWidget {
         controller: controller,
         onChanged: onSubmitted,
         obscureText: obsureText,
+        keyboardType: TextInputType.url,
         enableSuggestions: enableSuggestions,
         autocorrect: autocorrect,
-        padding: const EdgeInsets.all(10),
+        padding: padding ?? const EdgeInsets.all(10),
         placeholder: placeholder,
       );
     }
+
     return TextField(
       controller: controller,
       obscureText: obsureText,
       enableSuggestions: enableSuggestions,
       onChanged: onSubmitted,
+      keyboardType: TextInputType.url,
       onSubmitted: onSubmitted,
       autocorrect: autocorrect,
       decoration: InputDecoration(
+        hintText: placeholder,
+        filled: true,
+        fillColor: context.colorScheme.primary.withOpacity(0.0),
         border: const OutlineInputBorder(),
-        contentPadding: const EdgeInsets.all(10),
-        labelText: placeholder,
+        contentPadding: padding ?? const EdgeInsets.all(10),
       ),
     );
   }
