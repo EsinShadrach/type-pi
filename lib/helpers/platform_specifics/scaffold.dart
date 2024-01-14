@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:type_pi/helpers/extensions/on_context.dart';
 import 'package:type_pi/helpers/platform_specifics/text_field.dart';
 import 'package:type_pi/providers/base.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PlatformScaffold extends StatelessWidget {
   const PlatformScaffold({
@@ -58,11 +60,21 @@ class PlatformScaffold extends StatelessWidget {
         ),
         centerTitle: true,
         actions: [
-          TextButton(
-            onPressed: () {
-              //
-            },
-            child: const Text("apples"),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: TextButton.icon(
+              onPressed: () {
+                //
+              },
+              icon: SvgPicture.asset(
+                "assets/icons/github.svg",
+                height: 24,
+                colorFilter: ColorFilter.mode(
+                    context.colorScheme.primary, BlendMode.srcIn),
+                width: 24,
+              ),
+              label: const Text("Github"),
+            ),
           ),
         ],
       ),
@@ -119,5 +131,15 @@ class _AnimatedIconExampleState extends State<AnimatedIconExample>
         semanticLabel: 'Show menu',
       ),
     );
+  }
+}
+
+void openGithuburl() async {
+  Uri url = Uri.parse('https://github.com/EsinShadrach/type-pi');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    // Thow An Alert dialog here
+    throw 'Could not launch $url';
   }
 }
