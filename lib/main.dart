@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:type_pi/helpers/platform_specifics/material_or_cupertino.dart';
 import 'package:type_pi/helpers/platform_specifics/scaffold.dart';
+import 'package:type_pi/helpers/widgets/sidebar.dart';
 import 'package:type_pi/providers/base.dart';
 
 void main() {
@@ -37,31 +38,11 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final railProvider = context.watch<NavRailProvider>();
-
     return PlatformScaffold(
       body: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          NavigationRail(
-            useIndicator: true,
-            extended: railProvider.isOpened,
-            onDestinationSelected: (index) {
-              railProvider.selectIndex(index);
-            },
-            destinations: const [
-              NavigationRailDestination(
-                indicatorColor: Colors.red,
-                icon: Icon(Icons.code),
-                label: Text('Date'),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.code),
-                label: Text('Date'),
-              )
-            ],
-            selectedIndex: railProvider.selectedIndex,
-          ),
+          const SideBar(),
           Expanded(
             child: Container(
               color: Colors.red,

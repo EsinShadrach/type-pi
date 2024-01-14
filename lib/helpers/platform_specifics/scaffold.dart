@@ -64,7 +64,7 @@ class PlatformScaffold extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: TextButton.icon(
               onPressed: () {
-                //
+                openGithuburl();
               },
               icon: SvgPicture.asset(
                 "assets/icons/github.svg",
@@ -134,12 +134,9 @@ class _AnimatedIconExampleState extends State<AnimatedIconExample>
   }
 }
 
-void openGithuburl() async {
+Future<void> openGithuburl() async {
   Uri url = Uri.parse('https://github.com/EsinShadrach/type-pi');
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    // Thow An Alert dialog here
-    throw 'Could not launch $url';
+  if (!await launchUrl(url)) {
+    throw Exception('Could not launch $url');
   }
 }
