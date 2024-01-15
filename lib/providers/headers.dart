@@ -8,11 +8,8 @@ class HeadersProvider extends ChangeNotifier {
   ];
 
   debugPrintHeaders() {
-    for (var element in _headers) {
-      element.forEach((key, value) {
-        debugPrint('$key: $value');
-      });
-    }
+    debugPrint(headers.toString());
+    debugPrint('------------------');
   }
 
   List<Map<String, String>> get headers => _headers;
@@ -23,6 +20,9 @@ class HeadersProvider extends ChangeNotifier {
   }
 
   void removeRow(int index) {
+    if (_headers.length == 1) {
+      return;
+    }
     _headers.removeAt(index);
     notifyListeners();
   }

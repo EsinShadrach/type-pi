@@ -37,30 +37,33 @@ class ShowMyDialogs {
                           color: context.colorScheme.primary.withOpacity(0.0),
                         ),
                         children: [
-                          PlatformTextField(
-                            padding: const EdgeInsets.all(20),
-                            value: headersProvider.headers[index].keys.first,
-                            obscureText: false,
-                            enableSuggestions: true,
-                            autocorrect: true,
-                            placeholder: "Key",
+                          TextAreaForDialog(
+                            text: headersProvider.headers[index].keys.first,
                             onChanged: (value) {
                               headersProvider.updateHeaderKey(index, value);
                               debugPrint(value);
                             },
                           ),
-                          PlatformTextField(
-                            padding: const EdgeInsets.all(20),
-                            value: headersProvider.headers[index].values.first,
-                            obscureText: false,
-                            enableSuggestions: true,
-                            autocorrect: true,
-                            placeholder: "Value",
+                          TextAreaForDialog(
+                            text: headersProvider.headers[index].values.first,
                             onChanged: (value) {
-                              headersProvider.updateHeaderValue(index, value);
+                              headersProvider.updateHeaderKey(index, value);
                               debugPrint(value);
                             },
                           ),
+                          // PlatformTextField(
+                          //   padding: const EdgeInsets.all(20),
+                          //   // value: headersProvider.headers[index].values.first,
+                          //   obscureText: false,
+                          //   enableSuggestions: true,
+                          //   autocorrect: true,
+                          //   placeholder: "Value",
+                          //   onChanged: (value) {
+                          //     // String val = value.reverse;
+                          //     headersProvider.updateHeaderValue(index, value);
+                          //     debugPrint(value);
+                          //   },
+                          // ),
                           IconButton(
                             onPressed: () {
                               headersProvider.removeRow(index);
@@ -96,6 +99,49 @@ class ShowMyDialogs {
           ),
         ),
       ),
+    );
+  }
+}
+
+class TextAreaForDialog extends StatefulWidget {
+  const TextAreaForDialog({
+    super.key,
+    required this.text,
+    required this.onChanged,
+  });
+
+  final String text;
+  final void Function(String) onChanged;
+
+  @override
+  State<TextAreaForDialog> createState() => _TextAreaForDialogState();
+}
+
+class _TextAreaForDialogState extends State<TextAreaForDialog> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.text);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PlatformTextField(
+      controller: _controller,
+      padding: const EdgeInsets.all(20),
+      obscureText: false,
+      enableSuggestions: true,
+      autocorrect: true,
+      placeholder: "Key",
+      onChanged: widget.onChanged,
     );
   }
 }
