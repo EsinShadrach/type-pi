@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:type_pi/helpers/extensions/on_context.dart';
-import 'package:type_pi/helpers/platform_specifics/buttons.dart';
 import 'package:type_pi/helpers/platform_specifics/text_field.dart';
 import 'package:type_pi/helpers/widgets/api_config_dialog.dart';
 import 'package:type_pi/providers/base.dart';
@@ -30,11 +28,10 @@ class PlatformScaffold extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               width: 400,
               child: PlatformTextField(
-                controller: TextEditingController(),
-                obsureText: false,
+                obscureText: false,
                 enableSuggestions: true,
                 autocorrect: true,
                 placeholder: "Enter a GET api endpoint",

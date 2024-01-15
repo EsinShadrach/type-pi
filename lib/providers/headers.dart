@@ -1,28 +1,46 @@
 import 'package:flutter/material.dart';
 
 class HeadersProvider extends ChangeNotifier {
-  final List<Map<String, String>> _headers = [];
+  final List<Map<String, String>> _headers = [
+    {'content': 'appl'},
+    {'data-2': 'cand'},
+    {'': ''},
+  ];
+
+  debugPrintHeaders() {
+    for (var element in _headers) {
+      element.forEach((key, value) {
+        debugPrint('$key: $value');
+      });
+    }
+  }
 
   List<Map<String, String>> get headers => _headers;
 
-  void addHeader(String key, String value) {
-    _headers.add({key: value});
+  void addRow() {
+    _headers.add({'': ''});
     notifyListeners();
   }
 
-  void removeHeader(String key) {
-    _headers.removeWhere((element) => element.containsKey(key));
-    notifyListeners();
-  }
-
-  void updateHeader(String key, String value) {
-    _headers.removeWhere((element) => element.containsKey(key));
-    _headers.add({key: value});
+  void removeRow(int index) {
+    _headers.removeAt(index);
     notifyListeners();
   }
 
   void clearHeaders() {
     _headers.clear();
+    notifyListeners();
+  }
+
+  void updateHeaderKey(int index, String key) {
+    final Map<String, String> updatedHeader = Map.from(_headers[index]);
+    _headers[index] = {key: updatedHeader.values.first};
+    notifyListeners();
+  }
+
+  void updateHeaderValue(int index, String value) {
+    final Map<String, String> updatedHeader = Map.from(_headers[index]);
+    _headers[index] = {updatedHeader.keys.first: value};
     notifyListeners();
   }
 }
