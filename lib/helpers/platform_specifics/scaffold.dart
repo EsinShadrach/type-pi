@@ -70,7 +70,9 @@ class PlatformScaffold extends StatelessWidget {
                 "assets/icons/github.svg",
                 height: 24,
                 colorFilter: ColorFilter.mode(
-                    context.colorScheme.primary, BlendMode.srcIn),
+                  context.colorScheme.primary,
+                  BlendMode.srcIn,
+                ),
                 width: 24,
               ),
               label: const Text("Github"),
